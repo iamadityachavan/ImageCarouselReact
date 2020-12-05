@@ -11,6 +11,12 @@ class ImageCarousel extends React.Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
+    componentDidUpdate(){
+        if ((this.state.showCarousel !== this.props.myProps.showCarousel || this.state.activeCarouselIndex !== this.props.myProps.activeCarouselIndex) && !this.state.showCarousel) {
+            this.setState({ showCarousel: this.props.myProps.showCarousel });
+            this.setState({ activeCarouselIndex: this.props.myProps.activeCarouselIndex });
+        }
+    }
 
     handleClose() {
         this.props.myProps.showCarousel = false;
@@ -31,9 +37,6 @@ class ImageCarousel extends React.Component {
         this.setState({ activeCarouselIndex: selectedIndex });
     }
     render() {
-        if (!this.state.showCarousel) {
-            this.state = { ...this.props.myProps };
-        }
         return (
             <Modal
                 dialogClassName="modal-90w"
